@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "b7d4dc2d-a4f5-4e35-bddd-06401abbeaa4",
+		"name": "Mensaje Service API",
+		"description": "API para servicio de mensajes tipo Twitter desarrollado en Go",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47398147",
+		"_collection_link": "https://alejandroprado-ajp-8500058.postman.co/workspace/Alejandro-Jes%C3%BAs-Prado's-Workspa~f4c42fbe-e3dc-4cc4-83c0-e18ecc4680b9/collection/47398147-b7d4dc2d-a4f5-4e35-bddd-06401abbeaa4?action=share&source=collection_link&creator=47398147"
+	},
+	"item": [
+		{
+			"name": "Messages",
+			"item": [
+				{
+					"name": "Create Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-User-ID",
+								"value": "user123",
+								"description": "ID del usuario que crea el mensaje"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"content\": \"Este es mi 4to mensaje\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/messages",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"messages"
+							]
+						},
+						"description": "Crear un nuevo mensaje. Requiere X-User-ID en el header y content en el body."
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Messages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "user123",
+								"description": "ID del usuario cuyos mensajes se quieren obtener"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/messages",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"messages"
+							]
+						},
+						"description": "Obtener todos los mensajes de un usuario específico. Requiere X-User-ID en el header."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints relacionados con la gestión de mensajes"
+		},
+		{
+			"name": "Follows",
+			"item": [
+				{
+					"name": "Follow User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-User-ID",
+								"value": "user456",
+								"description": "ID del usuario que quiere seguir a otro"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"following_id\": \"user123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/follows",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"follows"
+							]
+						},
+						"description": "Seguir a un usuario. Requiere X-User-ID en el header y following_id en el body."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints relacionados con seguir usuarios"
+		},
+		{
+			"name": "Timeline",
+			"item": [
+				{
+					"name": "Get User Timeline",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "user456",
+								"description": "ID del usuario cuyo timeline se quiere obtener"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/timeline",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"timeline"
+							]
+						},
+						"description": "Obtener el timeline del usuario (mensajes de usuarios que sigue). Requiere X-User-ID en el header."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints relacionados con el timeline del usuario"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:80",
+			"type": "string"
+		}
+	]
+}
