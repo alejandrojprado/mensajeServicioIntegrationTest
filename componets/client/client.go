@@ -30,7 +30,7 @@ func (c *Client) doRequest(method, path string, body interface{}, headers map[st
 		if err != nil {
 			return nil, err
 		}
-		req, err = http.NewRequest(method, c.baseURL+path, bytes.NewBuffer(jsonBody))
+		req, _ = http.NewRequest(method, c.baseURL+path, bytes.NewBuffer(jsonBody))
 	} else {
 		req, err = http.NewRequest(method, c.baseURL+path, nil)
 	}
@@ -51,7 +51,7 @@ func (c *Client) CreateMessage(userID string, content string) (*models.Message, 
 	request := models.RequestCreateMessage{Content: content}
 	headers := map[string]string{"X-User-ID": userID}
 
-	resp, err := c.doRequest("POST", "/messages", request, headers)
+	resp, err := c.doRequest("POST", "/message", request, headers)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ func (c *Client) CreateMessage(userID string, content string) (*models.Message, 
 func (c *Client) GetUserMessages(userID string) ([]models.Message, error) {
 	headers := map[string]string{"X-User-ID": userID}
 
-	resp, err := c.doRequest("GET", "/messages", nil, headers)
+	resp, err := c.doRequest("GET", "/message", nil, headers)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ func (c *Client) FollowUser(followerID string, followingID string) error {
 	request := models.RequestFollow{FollowingID: followingID}
 	headers := map[string]string{"X-User-ID": followerID}
 
-	resp, err := c.doRequest("POST", "/follows", request, headers)
+	resp, err := c.doRequest("POST", "/follow", request, headers)
 	if err != nil {
 		return err
 	}
